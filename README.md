@@ -45,8 +45,9 @@ The location at which the `jenkins-cli.jar` jarfile will be kept. This is used f
       - blueocean
       - name: influxdb
         version: "1.12.1"
+        state: disabled  # cannot be latest
 
-Jenkins plugins to be installed automatically during provisioning. Defaults to empty list (`[]`). Items can use name or dictionary with `name` and `version` keys to pin specific version of a plugin.
+Jenkins plugins to be installed automatically during provisioning. Defaults to empty list (`[]`). Items can use name or dictionary with `name`, `version`, and `state` keys to pin specific version of a plugin or to enable/disable/uninstall a plugin.
 
     jenkins_plugins_install_dependencies: true
 
@@ -54,7 +55,7 @@ Whether Jenkins plugins to be installed should also install any plugin dependenc
 
     jenkins_plugins_state: present
 
-Use `latest` to ensure all plugins are running the most up-to-date version. For any plugin that has a specific version set in `jenkins_plugins` list, state `present` will be used instead of `jenkins_plugins_state` value.
+Fallback used when individual plugins in list do not specify `state`. Use `latest` to ensure all plugins are running the most up-to-date version. For any plugin that has a specific version set in `jenkins_plugins` list, state `present` will be used instead of `jenkins_plugins_state` value.
 
     jenkins_plugin_updates_expiration: 86400
 
